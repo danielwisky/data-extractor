@@ -19,19 +19,21 @@ public class BibleWriteService {
 
     private static final String BLANK_SPACE = " ";
     private static final String MINUS = "-";
+    private static final String BIBLE = "bible";
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @SneakyThrows
     public void write(final Bible bible) {
-        createDirectory(Paths.get(bible.getVersion()));
+        createDirectory(Paths.get(BIBLE));
+        createDirectory(Paths.get(String.format("%s/%s", BIBLE, bible.getVersion())));
 
         for (Book book : bible.getBooks()) {
             final String titleNormalized = normalize(book.getTitle());
-            createDirectory(Paths.get(String.format("%s/%s", bible.getVersion(), titleNormalized)));
+            createDirectory(Paths.get(String.format("%s/%s/%s", BIBLE, bible.getVersion(), titleNormalized)));
 
             for (Chapter chapter : book.getChapters()) {
-                FileWriter file = new FileWriter(String.format("%s/%s/%s.json", bible.getVersion(), titleNormalized, chapter.getChapter()));
+                FileWriter file = new FileWriter(String.format("%s/%s/%s/%s.json", BIBLE, bible.getVersion(), titleNormalized, chapter.getChapter()));
                 file.write(objectMapper.writeValueAsString(chapter.getVerses()));
                 file.flush();
             }
