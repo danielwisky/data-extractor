@@ -11,7 +11,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.substring;
@@ -66,7 +65,7 @@ public class BibleExtractService {
         final Verse verse = new Verse();
         final String verseAstext = verseAsElement.text();
         verse.setNumber(Integer.valueOf(substring(verseAstext, INTEGER_ZERO, verseAstext.indexOf(BLANK_SPACE))));
-        verse.setText(trim(StringUtils.substring(verseAstext, verseAstext.indexOf(BLANK_SPACE))));
+        verse.setVerse(trim(StringUtils.substring(verseAstext, verseAstext.indexOf(BLANK_SPACE))));
         return verse;
     }
 
