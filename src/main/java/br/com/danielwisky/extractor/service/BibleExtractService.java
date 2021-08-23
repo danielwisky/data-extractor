@@ -36,6 +36,7 @@ public class BibleExtractService {
 
     @SneakyThrows
     private List<Book> extractedBooks(final String bibleUrl) {
+        System.out.println(String.format("reading %s ...", bibleUrl));
         final Document bibleAsDoc = Jsoup.connect(bibleUrl).get();
         return bibleAsDoc.select(BIBLE_QUERY)
                 .stream()
@@ -45,6 +46,7 @@ public class BibleExtractService {
 
     @SneakyThrows
     private List<Chapter> extractChapters(final String hrefChapter) {
+        System.out.println(String.format("reading %s ...", hrefChapter));
         final Document chapterAsDoc = Jsoup.connect(hrefChapter).get();
         return chapterAsDoc.select(CHAPTER_QUERY)
                 .stream()
@@ -54,6 +56,7 @@ public class BibleExtractService {
 
     @SneakyThrows
     private List<Verse> extractVerses(final String hrefVerse) {
+        System.out.println(String.format("reading %s ...", hrefVerse));
         final Document chapterAsDoc = Jsoup.connect(hrefVerse).get();
         return chapterAsDoc.select(VERSE_QUERY)
                 .stream()
