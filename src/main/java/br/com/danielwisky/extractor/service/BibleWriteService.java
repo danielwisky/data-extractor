@@ -2,7 +2,6 @@ package br.com.danielwisky.extractor.service;
 
 import br.com.danielwisky.extractor.domains.Bible;
 import br.com.danielwisky.extractor.domains.Book;
-import br.com.danielwisky.extractor.domains.Chapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
@@ -30,13 +29,10 @@ public class BibleWriteService {
 
         for (Book book : bible.getBooks()) {
             final String titleNormalized = normalize(book.getTitle());
-            createDirectory(Paths.get(String.format("%s/%s/%s", BIBLE, bible.getVersion(), titleNormalized)));
-
-            for (Chapter chapter : book.getChapters()) {
-                FileWriter file = new FileWriter(String.format("%s/%s/%s/%s.json", BIBLE, bible.getVersion(), titleNormalized, chapter.getChapter()));
-                file.write(objectMapper.writeValueAsString(chapter.getVerses()));
-                file.flush();
-            }
+            final FileWriter file = new FileWriter(String.format("%s/%s/%s.json", BIBLE, bible.getVersion(), titleNormalized));
+            file.write(objectMapper.writeValueAsString(book.getChapters()));
+            file.flush();
+            file.close();
         }
     }
 

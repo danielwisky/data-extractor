@@ -22,7 +22,7 @@ public class BibleExtractService {
     private static final String BIBLE_URL = "https://www.bibliaonline.com.br/%s/index";
     private static final String BIBLE_QUERY = ".jss2 a";
     private static final String CHAPTER_QUERY = ".jss1 a";
-    private static final String VERSE_QUERY = ".jss40 p";
+    private static final String VERSE_QUERY = "p.jss43";
     private static final String HREF = "href";
     private static final String BLANK_SPACE = " ";
 

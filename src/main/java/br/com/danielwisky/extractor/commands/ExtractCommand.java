@@ -17,7 +17,7 @@ public class ExtractCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        final Bible nvi = bibleExtractService.extract("nvi");
+        final Bible nvi = bibleExtractService.extract("ara");
         bibleWriteService.write(nvi);
         return 0;
     }
