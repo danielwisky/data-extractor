@@ -1,10 +1,22 @@
 package br.com.danielwisky.extractor.domains;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.Data;
 
 @Data
-public class Verse {
+@Entity
+public class Verse implements Serializable {
 
-    private Integer number;
-    private String verse;
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private Long id;
+
+  private Integer number;
+
+  private String verse;
 }

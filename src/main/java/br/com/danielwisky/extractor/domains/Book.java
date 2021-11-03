@@ -1,12 +1,26 @@
 package br.com.danielwisky.extractor.domains;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class Book {
+@Entity
+public class Book implements Serializable {
 
-    private String title;
-    private List<Chapter> chapters;
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private Long id;
+
+  private String title;
+
+  @OneToMany(cascade = ALL)
+  private List<Chapter> chapters;
 }

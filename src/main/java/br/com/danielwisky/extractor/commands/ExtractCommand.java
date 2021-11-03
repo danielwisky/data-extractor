@@ -1,24 +1,24 @@
 package br.com.danielwisky.extractor.commands;
 
 import br.com.danielwisky.extractor.domains.Bible;
+import br.com.danielwisky.extractor.repositories.BibleRepository;
 import br.com.danielwisky.extractor.service.BibleExtractService;
-import br.com.danielwisky.extractor.service.BibleWriteService;
+import java.util.concurrent.Callable;
 import lombok.RequiredArgsConstructor;
 import picocli.CommandLine.Command;
-
-import java.util.concurrent.Callable;
 
 @Command(name = "extract")
 @RequiredArgsConstructor
 public class ExtractCommand implements Callable<Integer> {
 
-    private final BibleExtractService bibleExtractService;
-    private final BibleWriteService bibleWriteService;
+  private final BibleExtractService bibleExtractService;
 
-    @Override
-    public Integer call() throws Exception {
-        final Bible nvi = bibleExtractService.extract("ara");
-        bibleWriteService.write(nvi);
-        return 0;
-    }
+  private final BibleRepository bibleRepository;
+
+  @Override
+  public Integer call() {
+    final Bible nvi = bibleExtractService.extract("nvi");
+    bibleRepository.save(nvi);
+    return 0;
+  }
 }
