@@ -1,4 +1,4 @@
-package br.com.danielwisky.extractor.domains;
+package br.com.danielwisky.extractor.domains.vehicle;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -13,14 +13,16 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Chapter implements Serializable {
+public class Model implements Serializable {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  private Integer chapter;
+  private String name;
+
+  private String externalCode;
 
   @OneToMany(cascade = ALL)
-  private List<Verse> verses;
+  private List<Vehicle> vehicles;
 }

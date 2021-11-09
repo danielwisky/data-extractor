@@ -5,10 +5,10 @@ import static org.apache.commons.lang3.StringUtils.substring;
 import static org.apache.commons.lang3.StringUtils.trim;
 import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
-import br.com.danielwisky.extractor.domains.Bible;
-import br.com.danielwisky.extractor.domains.Book;
-import br.com.danielwisky.extractor.domains.Chapter;
-import br.com.danielwisky.extractor.domains.Verse;
+import br.com.danielwisky.extractor.domains.bible.Bible;
+import br.com.danielwisky.extractor.domains.bible.Book;
+import br.com.danielwisky.extractor.domains.bible.Chapter;
+import br.com.danielwisky.extractor.domains.bible.Verse;
 import java.util.List;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;

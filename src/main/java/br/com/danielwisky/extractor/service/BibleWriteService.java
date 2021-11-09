@@ -3,8 +3,8 @@ package br.com.danielwisky.extractor.service;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-import br.com.danielwisky.extractor.domains.Bible;
-import br.com.danielwisky.extractor.domains.Book;
+import br.com.danielwisky.extractor.domains.bible.Bible;
+import br.com.danielwisky.extractor.domains.bible.Book;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileWriter;
 import java.nio.file.Files;

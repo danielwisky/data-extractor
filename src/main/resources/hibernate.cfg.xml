@@ -26,10 +26,14 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="br.com.danielwisky.extractor.domains.Bible"/>
-        <mapping class="br.com.danielwisky.extractor.domains.Book"/>
-        <mapping class="br.com.danielwisky.extractor.domains.Chapter"/>
-        <mapping class="br.com.danielwisky.extractor.domains.Verse"/>
+        <mapping class="br.com.danielwisky.extractor.domains.bible.Bible"/>
+        <mapping class="br.com.danielwisky.extractor.domains.bible.Book"/>
+        <mapping class="br.com.danielwisky.extractor.domains.bible.Chapter"/>
+        <mapping class="br.com.danielwisky.extractor.domains.bible.Verse"/>
+        <mapping class="br.com.danielwisky.extractor.domains.vehicle.Brand"/>
+        <mapping class="br.com.danielwisky.extractor.domains.vehicle.Metric"/>
+        <mapping class="br.com.danielwisky.extractor.domains.vehicle.Model"/>
+        <mapping class="br.com.danielwisky.extractor.domains.vehicle.Vehicle"/>
     </session-factory>
 
 </hibernate-configuration>
