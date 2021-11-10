@@ -32,7 +32,7 @@ public class BibleWriteService {
 
   @SneakyThrows
   public void write(final Bible bible) {
-    createDirectory(Paths.get(BIBLE));
+    //createDirectory(Paths.get(BIBLE));
     createDirectory(Paths.get(String.format("%s/%s/%s", DATA, BIBLE, bible.getVersion())));
 
     for (Book book : bible.getBooks()) {

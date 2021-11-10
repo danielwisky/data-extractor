@@ -10,21 +10,13 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Metric implements Serializable {
+public class GroupModel implements Serializable {
 
-  private static final long serialVersionUID = -3199398186813832110L;
+  private static final long serialVersionUID = -3032289196544394898L;
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  private String type;
-
-  private Double torque;
-
-  private Double power;
-
-  private Double city;
-
-  private Double road;
+  private String name;
 }

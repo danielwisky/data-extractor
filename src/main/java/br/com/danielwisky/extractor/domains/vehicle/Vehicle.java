@@ -6,14 +6,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Data;
+import org.hibernate.annotations.BatchSize;
 
 @Data
 @Entity
 public class Vehicle implements Serializable {
+
+  private static final long serialVersionUID = 408855068954439795L;
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
@@ -23,12 +27,17 @@ public class Vehicle implements Serializable {
 
   private String year;
 
+  private Double speed;
+
+  private Double time0to100;
+
   private String name;
 
   private String engine;
 
   private Double weight;
 
-  @OneToMany(cascade = ALL)
+  @BatchSize(size = 50)
+  @OneToMany(cascade = ALL, fetch = FetchType.LAZY)
   private List<Metric> metrics;
 }
