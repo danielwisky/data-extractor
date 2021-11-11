@@ -8,10 +8,10 @@ public class MarcaResource {
 
   private Long id;
 
-  private String nome;
+  private String name;
 
   public MarcaResource(final Brand brand) {
     this.id = brand.getId();
-    this.nome = brand.getName();
+    this.name = brand.getName();
   }
 }

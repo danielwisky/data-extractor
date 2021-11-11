@@ -1,37 +1,39 @@
 package br.com.danielwisky.extractor.service.vehicle.writer;
 
 import br.com.danielwisky.extractor.domains.vehicle.Vehicle;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VehicleResource {
 
   private Long id;
 
-  private String ano;
+  private String year;
 
-  private String motor;
+  private String engine;
 
-  @JsonProperty("velocidade_maxima")
-  private Double velocidadeMax;
+  @JsonProperty("top_speed")
+  private Double topspeed;
 
-  @JsonProperty("tempo")
+  @JsonProperty("time")
   private Double tempo0a100;
 
-  private Double peso;
+  private Double weight;
 
-  private List<MetricaResource> metricas;
+  private List<MetricaResource> metrics;
 
   public VehicleResource(final Vehicle vehicle) {
     this.id = vehicle.getId();
-    this.ano = vehicle.getYear();
-    this.motor = vehicle.getEngine();
-    this.peso = vehicle.getWeight();
-    this.velocidadeMax = vehicle.getSpeed();
+    this.year = vehicle.getYear();
+    this.engine = vehicle.getEngine();
+    this.weight = vehicle.getWeight();
+    this.topspeed = vehicle.getSpeed();
     this.tempo0a100 = vehicle.getTime0to100();
-    this.metricas = vehicle.getMetrics().stream().map(MetricaResource::new).collect(Collectors.toList());
+    this.metrics = vehicle.getMetrics().stream().map(MetricaResource::new).collect(Collectors.toList());
   }
 }

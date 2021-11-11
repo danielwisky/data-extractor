@@ -49,7 +49,7 @@ public class WriteVehicleService {
   @SneakyThrows
   private void writeBrand(final String root, final Brand brand) {
     createDirectory(Paths.get(String.format("%s/%s", root, brand.getId())));
-    final String brandFolder = String.format("%s/%s/%s", root, brand.getId(), "modelos");
+    final String brandFolder = String.format("%s/%s/%s", root, brand.getId(), "models");
     createDirectory(Paths.get(brandFolder));
 
     final List<Model> models = brand.getModels();
@@ -66,7 +66,7 @@ public class WriteVehicleService {
     final String modelFolder = String.format("%s/%s", brandFolder, model.getId());
     createDirectory(Paths.get(modelFolder));
 
-    final String versionFolder = String.format("%s/%s", modelFolder, "versoes");
+    final String versionFolder = String.format("%s/%s", modelFolder, "versions");
     createDirectory(Paths.get(versionFolder));
 
     final Map<String, List<Vehicle>> mapModels = model.getVehicles()
@@ -92,7 +92,7 @@ public class WriteVehicleService {
 
               GroupModel groupModel = genericRepository.findGroupModelByName(it.getKey());
               final String groupFolder = String.format("%s/%s", versionFolder, groupModel.getId());
-              final String vehicleFolder = String.format("%s/%s", groupFolder, "veiculos");
+              final String vehicleFolder = String.format("%s/%s", groupFolder, "vehicles");
               createDirectory(Paths.get(groupFolder));
               createDirectory(Paths.get(vehicleFolder));
 

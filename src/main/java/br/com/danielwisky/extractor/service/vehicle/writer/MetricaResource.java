@@ -1,29 +1,31 @@
 package br.com.danielwisky.extractor.service.vehicle.writer;
 
 import br.com.danielwisky.extractor.domains.vehicle.Metric;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MetricaResource {
 
-  private String tipo;
+  private String type;
 
-  private Double potencia;
+  private Double power;
 
   private Double torque;
 
-  @JsonProperty("consumo_cidade")
-  private Double consumoCidade;
+  @JsonProperty("city_fuel_consumption")
+  private Double cityConsumption;
 
-  @JsonProperty("consumo_estrada")
-  private Double consumoEstrada;
+  @JsonProperty("road_fuel_consumption")
+  private Double roadConsumption;
 
   public MetricaResource(final Metric metric) {
-    this.tipo = metric.getType();
+    this.type = metric.getType();
     this.torque = metric.getTorque();
-    this.potencia = metric.getPower();
-    this.consumoCidade = metric.getCity();
-    this.consumoEstrada = metric.getRoad();
+    this.power = metric.getPower();
+    this.cityConsumption = metric.getCity();
+    this.roadConsumption = metric.getRoad();
   }
 }
