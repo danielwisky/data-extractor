@@ -35,9 +35,11 @@ public class Vehicle implements Serializable {
 
   private String engine;
 
+  private String engineShort;
+
   private Double weight;
 
   @BatchSize(size = 50)
-  @OneToMany(cascade = ALL, fetch = FetchType.LAZY)
+  @OneToMany(cascade = ALL, fetch = FetchType.EAGER)
   private List<Metric> metrics;
 }

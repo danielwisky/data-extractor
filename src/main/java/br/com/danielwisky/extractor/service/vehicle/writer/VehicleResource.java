@@ -17,6 +17,9 @@ public class VehicleResource {
 
   private String engine;
 
+  @JsonProperty("engine_desc")
+  private String engineDescription;
+
   @JsonProperty("top_speed")
   private Double topspeed;
 
@@ -30,7 +33,8 @@ public class VehicleResource {
   public VehicleResource(final Vehicle vehicle) {
     this.id = vehicle.getId();
     this.year = vehicle.getYear();
-    this.engine = vehicle.getEngine();
+    this.engine = vehicle.getEngineShort();
+    this.engineDescription = vehicle.getEngine();
     this.weight = vehicle.getWeight();
     this.topspeed = vehicle.getSpeed();
     this.tempo0a100 = vehicle.getTime0to100();

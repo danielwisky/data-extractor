@@ -3,6 +3,7 @@ package br.com.danielwisky.extractor.repositories;
 import br.com.danielwisky.extractor.domains.vehicle.Brand;
 import br.com.danielwisky.extractor.domains.vehicle.GroupModel;
 import br.com.danielwisky.extractor.domains.vehicle.Model;
+import br.com.danielwisky.extractor.domains.vehicle.Vehicle;
 import br.com.danielwisky.extractor.utils.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ public class GenericRepository {
     try {
       final Session session = sessionFactory.openSession();
       transaction = session.beginTransaction();
-      session.save(object);
+      session.merge(object);
       transaction.commit();
     } catch (Exception e) {
       e.printStackTrace();
@@ -52,28 +53,20 @@ public class GenericRepository {
   }
 
   public List<Brand> findBrands() {
-    Transaction transaction = null;
-    List<Brand> brands = null;
-    try {
-      final Session session = HibernateUtil.getSessionFactory().openSession();
-      transaction = session.beginTransaction();
-      Query query = session.createQuery("from Brand");
-      brands = query.getResultList();
-      transaction.commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      if (transaction != null) {
-        transaction.rollback();
-      }
-    } finally {
-      HibernateUtil.shutdown();
-      return brands;
-    }
+    final Session session = HibernateUtil.getSessionFactory().openSession();
+    Query query = session.createQuery("from Brand");
+    return query.getResultList();
   }
 
   public GroupModel findGroupModelByName(final String name) {
     final Session session = HibernateUtil.getSessionFactory().openSession();
     final Query query = session.createQuery("from GroupModel where name = :name").setParameter("name", name);
     return (GroupModel) query.uniqueResult();
+  }
+
+  public List<Vehicle> findVehicles() {
+    final Session session = HibernateUtil.getSessionFactory().openSession();
+    Query query = session.createQuery("from Vehicle v");
+    return query.getResultList();
   }
 }
