@@ -13,6 +13,8 @@ public class VehicleResource {
 
   private Long id;
 
+  private String name;
+
   private String year;
 
   private String engine;
@@ -30,8 +32,9 @@ public class VehicleResource {
 
   private List<MetricaResource> metrics;
 
-  public VehicleResource(final Vehicle vehicle) {
+  public VehicleResource(final Vehicle vehicle, final String name) {
     this.id = vehicle.getId();
+    this.name = name;
     this.year = vehicle.getYear();
     this.engine = vehicle.getEngineShort();
     this.engineDescription = vehicle.getEngine();

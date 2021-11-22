@@ -106,7 +106,7 @@ public class WriteVehicleService {
     writeInFile(
             vehicleFolder,
             objectMapper.writeValueAsString(mpVehicles.getValue().stream()
-                    .sorted(Comparator.comparing(Vehicle::getYear)).map(VehicleResource::new).collect(Collectors.toList())));
+                    .sorted(Comparator.comparing(Vehicle::getYear)).map(vehicle -> new VehicleResource(vehicle, mpVehicles.getKey())).collect(Collectors.toList())));
   }
 
   private GroupModel saveAndFindGroupModel(final String name) {
