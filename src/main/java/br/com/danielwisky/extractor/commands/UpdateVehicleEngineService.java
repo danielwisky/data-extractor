@@ -1,5 +1,6 @@
 package br.com.danielwisky.extractor.commands;
 
+import br.com.danielwisky.extractor.domains.vehicle.Metric;
 import br.com.danielwisky.extractor.domains.vehicle.Vehicle;
 import br.com.danielwisky.extractor.repositories.GenericRepository;
 import java.util.Arrays;
@@ -14,7 +15,16 @@ public class UpdateVehicleEngineService {
 
   public void execute() {
 
-    List<Vehicle> vehicles = genericRepository.findVehicles();
+    List<Metric> metrics = genericRepository.findMetrics();
+
+    metrics.stream().forEach(metric -> {
+      if(metric.getType().equalsIgnoreCase("Etanol")) {
+        metric.setType("Álcool");
+        genericRepository.save(metric);
+      }
+    });
+
+    /*List<Vehicle> vehicles = genericRepository.findVehicles();
 
     vehicles.stream().forEach(vehicle -> {
 
@@ -22,7 +32,7 @@ public class UpdateVehicleEngineService {
 
       vehicle.setEngineShort(engineShort);
       genericRepository.save(vehicle);
-    });
+    });*/
 
     System.out.println("fim...");
   }

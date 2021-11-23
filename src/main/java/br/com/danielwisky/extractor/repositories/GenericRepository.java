@@ -2,6 +2,7 @@ package br.com.danielwisky.extractor.repositories;
 
 import br.com.danielwisky.extractor.domains.vehicle.Brand;
 import br.com.danielwisky.extractor.domains.vehicle.GroupModel;
+import br.com.danielwisky.extractor.domains.vehicle.Metric;
 import br.com.danielwisky.extractor.domains.vehicle.Model;
 import br.com.danielwisky.extractor.domains.vehicle.Vehicle;
 import br.com.danielwisky.extractor.utils.HibernateUtil;
@@ -67,6 +68,12 @@ public class GenericRepository {
   public List<Vehicle> findVehicles() {
     final Session session = HibernateUtil.getSessionFactory().openSession();
     Query query = session.createQuery("from Vehicle v");
+    return query.getResultList();
+  }
+
+  public List<Metric> findMetrics() {
+    final Session session = HibernateUtil.getSessionFactory().openSession();
+    Query query = session.createQuery("from Metric v");
     return query.getResultList();
   }
 }
