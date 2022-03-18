@@ -1,9 +1,9 @@
-package br.com.danielwisky.mycrawler.gateways.outputs.mongoDB;
+package br.com.danielwisky.mycrawler.gateways.outputs.mongodb;
 
 import br.com.danielwisky.mycrawler.domains.Crawler;
 import br.com.danielwisky.mycrawler.gateways.CrawlerDataGateway;
-import br.com.danielwisky.mycrawler.gateways.outputs.mongoDB.documents.CrawlerDocument;
-import br.com.danielwisky.mycrawler.gateways.outputs.mongoDB.repositories.CrawlerRepository;
+import br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents.CrawlerDocument;
+import br.com.danielwisky.mycrawler.gateways.outputs.mongodb.repositories.CrawlerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,10 +1,14 @@
 package br.com.danielwisky.mycrawler.gateways.inputs.http.resources.request;
 
-import br.com.danielwisky.mycrawler.domains.Crawler;
+import javax.validation.constraints.NotBlank;
+import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
+@Data
 public class CrawlerRequest {
-
-  public Crawler toDomain() {
-    return null;
-  }
+  
+  @NotBlank
+  private String objectType;
+  @URL
+  private String url;
 }

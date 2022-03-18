@@ -15,10 +15,13 @@ public class ConfigurationRequest {
   @URL
   @NotBlank
   private String url;
+  @NotBlank
+  private String objectType;
 
   public Configuration toDomain() {
     return Configuration.builder()
         .url(this.url)
+        .objectType(this.objectType)
         .build();
   }
 }

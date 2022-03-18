@@ -1,10 +1,13 @@
 package br.com.danielwisky.mycrawler.gateways.inputs.http;
 
-import static org.springframework.http.HttpStatus.ACCEPTED;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.OK;
 
 import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.request.CrawlerRequest;
+import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.response.CrawlerResponse;
 import br.com.danielwisky.mycrawler.usecases.CreateCrawler;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,12 +25,17 @@ public class CrawlerController {
 
   private final CreateCrawler createCrawler;
 
-  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseStatus(ACCEPTED)
+  @PostMapping(
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(OK)
   @ApiOperation(value = "Create a crawler")
-  public ResponseEntity create(
+  public ResponseEntity<List<CrawlerResponse>> create(
       @RequestBody @Valid final CrawlerRequest crawlerRequest) {
-    createCrawler.execute(crawlerRequest.toDomain());
-    return ResponseEntity.accepted().build();
+    return ResponseEntity.ok(
+        createCrawler.execute(crawlerRequest.getObjectType(), crawlerRequest.getUrl())
+            .stream()
+            .map(CrawlerResponse::new)
+            .collect(toList()));
   }
 }

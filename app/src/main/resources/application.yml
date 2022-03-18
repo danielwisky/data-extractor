@@ -27,3 +27,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false

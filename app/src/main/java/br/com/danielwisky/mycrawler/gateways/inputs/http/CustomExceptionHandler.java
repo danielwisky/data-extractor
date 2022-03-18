@@ -6,10 +6,13 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import br.com.danielwisky.mycrawler.domains.exceptions.BusinessValidationException;
+import br.com.danielwisky.mycrawler.domains.exceptions.ResourceNotFoundException;
 import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.response.ErrorResponse;
 import java.util.List;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -20,8 +23,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
+  @ExceptionHandler(ResourceNotFoundException.class)
+  public HttpEntity<ErrorResponse> handlerResourceNotFoundException(
+      final ResourceNotFoundException ex) {
+    return new ResponseEntity<>(createMessage(ex), createHeaders(), HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(BusinessValidationException.class)
+  public HttpEntity<ErrorResponse> handlerBusinessValidationException(
+      final BusinessValidationException ex) {
+    return new ResponseEntity<>(createMessage(ex), createHeaders(), BAD_REQUEST);
+  }
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public HttpEntity<ErrorResponse> handlerValidationException(
+  public HttpEntity<ErrorResponse> handlerMethodArgumentNotValidException(
       final MethodArgumentNotValidException ex) {
 
     final BindingResult bindingResult = ex.getBindingResult();

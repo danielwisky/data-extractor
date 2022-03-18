@@ -1,8 +1,10 @@
 package br.com.danielwisky.mycrawler.gateways.inputs.http.resources.response;
 
+import static java.util.Optional.ofNullable;
+
+import br.com.danielwisky.mycrawler.domains.Crawler;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
-public class ErrorResponse {
+public class CrawlerResponse {
 
-  private List<String> errors;
+  private String id;
+  private String status;
+
+  public CrawlerResponse(final Crawler crawler) {
+    this.id = crawler.getId();
+    this.status = ofNullable(crawler.getStatus())
+        .map(Enum::name)
+        .orElse(null);
+  }
 }
