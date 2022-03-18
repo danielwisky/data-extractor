@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: my-crawlew
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/my-crawlew
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+    ttlInMinutes: 60
+  kafka:
+    bootstrap-servers: localhost:9092
+    listener:
+      concurrency: 1
+    consumer:
+      group-id: my-crawlew
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer:
+      retries: 10
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

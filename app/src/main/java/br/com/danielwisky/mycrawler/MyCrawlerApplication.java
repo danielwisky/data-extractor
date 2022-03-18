@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MycrawlerApplication {
+public class MyCrawlerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MycrawlerApplication.class, args);
+		SpringApplication.run(MyCrawlerApplication.class, args);
 	}
 
 }
