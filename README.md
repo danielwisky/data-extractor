@@ -1,1 +1,3 @@
-# data-extractor
+# my-crawler
+
+Generic data extraction system
