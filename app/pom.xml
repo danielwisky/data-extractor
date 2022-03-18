@@ -19,6 +19,7 @@
 
   <properties>
     <java.version>11</java.version>
+		<springfox.swagger.version>2.9.2</springfox.swagger.version>
     <commons-collections4.version>4.4</commons-collections4.version>
     <jsoup.version>1.14.3</jsoup.version>
   </properties>
@@ -40,6 +41,18 @@
       <groupId>org.springframework.kafka</groupId>
       <artifactId>spring-kafka</artifactId>
     </dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.swagger.version}</version>
+		</dependency>
 
     <!-- commons -->
     <dependency>
