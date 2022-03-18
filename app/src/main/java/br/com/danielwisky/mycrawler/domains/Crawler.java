@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Configuration {
+public class Crawler {
 
   private String id;
-  private String url;
-
+  private CrawlerStatus status;
 }
