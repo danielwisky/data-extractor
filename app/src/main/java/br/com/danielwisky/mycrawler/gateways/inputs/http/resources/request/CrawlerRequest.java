@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Data
 public class CrawlerRequest {
-  
+
   @NotBlank
   private String objectType;
   @URL
