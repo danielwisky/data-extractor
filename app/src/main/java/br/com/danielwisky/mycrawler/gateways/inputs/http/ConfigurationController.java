@@ -6,7 +6,7 @@ import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.request.Confi
 import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.response.ConfigurationResponse;
 import br.com.danielwisky.mycrawler.usecases.CreateConfiguration;
 import br.com.danielwisky.mycrawler.usecases.UpdateConfiguration;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -31,7 +31,7 @@ public class ConfigurationController {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(OK)
-  @ApiOperation(value = "Create configuration")
+  @Operation(description = "Create configuration")
   public ResponseEntity<ConfigurationResponse> create(
       @RequestBody @Valid final ConfigurationRequest configurationRequest) {
     return ResponseEntity.ok(new ConfigurationResponse(
@@ -43,7 +43,7 @@ public class ConfigurationController {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(OK)
-  @ApiOperation(value = "Update configuration")
+  @Operation(description = "Update configuration")
   public ResponseEntity<ConfigurationResponse> update(
       @PathVariable final String id,
       @RequestBody @Valid final ConfigurationRequest configurationRequest) {

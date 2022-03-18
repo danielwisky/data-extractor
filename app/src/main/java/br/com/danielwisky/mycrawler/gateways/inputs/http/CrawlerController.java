@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.OK;
 import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.request.CrawlerRequest;
 import br.com.danielwisky.mycrawler.gateways.inputs.http.resources.response.CrawlerResponse;
 import br.com.danielwisky.mycrawler.usecases.CreateCrawler;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class CrawlerController {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(OK)
-  @ApiOperation(value = "Create a crawler")
+  @Operation(description = "Create a crawler")
   public ResponseEntity<List<CrawlerResponse>> create(
       @RequestBody @Valid final CrawlerRequest crawlerRequest) {
     return ResponseEntity.ok(

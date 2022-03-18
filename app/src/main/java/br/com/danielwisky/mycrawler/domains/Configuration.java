@@ -1,5 +1,6 @@
 package br.com.danielwisky.mycrawler.domains;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Configuration {
+public class Configuration implements Serializable {
 
   private String id;
   private String objectType;

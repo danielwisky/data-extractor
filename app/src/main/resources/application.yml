@@ -1,15 +1,18 @@
 spring:
   application:
     name: my-crawlew
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/my-crawlew
   cache:
     type: redis
   redis:
     host: localhost
     port: 6379
     ttlInMinutes: 60
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/my-crawlew
+    redis:
+      repositories:
+        enabled: false
   kafka:
     bootstrap-servers: localhost:9092
     listener:
@@ -30,3 +33,5 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+springdoc:
+  pathsToMatch: /api/**
