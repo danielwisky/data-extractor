@@ -1,7 +1,7 @@
 package br.com.danielwisky.mycrawler.domains;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Configuration implements Serializable {
+public class CrawlerLine {
 
   private String id;
-  private String type;
-  private String url;
-  private Content content;
+  private String crawlerId;
+  private Map<String, String> fields;
 
   private LocalDateTime createdDate;
   private LocalDateTime lastModifiedDate;

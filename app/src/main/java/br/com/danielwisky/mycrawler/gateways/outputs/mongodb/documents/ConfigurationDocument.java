@@ -29,8 +29,6 @@ public class ConfigurationDocument {
   @Indexed
   private String type;
   private String url;
-  private String contentPath;
-  private String contentQuery;
   private ContentDocument content;
 
   @CreatedDate
@@ -42,8 +40,6 @@ public class ConfigurationDocument {
     this.id = configuration.getId();
     this.type = configuration.getType();
     this.url = configuration.getUrl();
-    this.contentPath = configuration.getContentPath();
-    this.contentQuery = configuration.getContentQuery();
     this.content = ofNullable(configuration.getContent())
         .map(ContentDocument::new)
         .orElse(null);
@@ -56,8 +52,6 @@ public class ConfigurationDocument {
         .id(this.id)
         .type(this.type)
         .url(this.url)
-        .contentPath(this.contentPath)
-        .contentQuery(this.contentQuery)
         .content(ofNullable(this.content)
             .map(ContentDocument::toDomain)
             .orElse(null))

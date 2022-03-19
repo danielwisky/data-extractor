@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class Field {
 
   private String name;
-  private String query;
-  private List<String> filters;
+  private String value;
+  private List<String> converters;
 }

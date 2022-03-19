@@ -12,21 +12,20 @@ import lombok.NoArgsConstructor;
 public class FieldDocument {
 
   private String name;
-  private String query;
-  private List<String> filters;
+  private String value;
+  private List<String> converters;
 
   public FieldDocument(final Field field) {
     this.name = field.getName();
-    this.query = field.getQuery();
-    this.filters = field.getFilters();
-
+    this.value = field.getValue();
+    this.converters = field.getConverters();
   }
 
   public Field toDomain() {
     return Field.builder()
         .name(this.name)
-        .query(this.query)
-        .filters(this.filters)
+        .value(this.value)
+        .converters(this.converters)
         .build();
   }
 }

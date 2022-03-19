@@ -12,11 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Content {
 
-  private String key;
-  private String keyQuery;
+  private String path;
+  private String query;
   private List<Field> fields;
 
-  private String childrenPath;
-  private String childrenQuery;
   private Content children;
 }

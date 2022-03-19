@@ -15,23 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ContentDocument {
 
-  private String key;
-  private String keyQuery;
+  private String path;
+  private String query;
   private List<FieldDocument> fields;
-
-  private String childrenPath;
-  private String childrenQuery;
   private ContentDocument children;
 
   public ContentDocument(final Content content) {
-    this.key = content.getKey();
-    this.keyQuery = content.getKeyQuery();
+    this.path = content.getPath();
+    this.query = content.getQuery();
     this.fields = emptyIfNull(content.getFields())
         .stream()
         .map(FieldDocument::new)
         .collect(toList());
-    this.childrenPath = content.getChildrenPath();
-    this.childrenQuery = content.getChildrenQuery();
     this.children = ofNullable(content.getChildren())
         .map(ContentDocument::new)
         .orElse(null);
@@ -39,14 +34,12 @@ public class ContentDocument {
 
   public Content toDomain() {
     return Content.builder()
-        .key(this.key)
-        .keyQuery(this.keyQuery)
+        .path(this.path)
+        .query(this.query)
         .fields(emptyIfNull(this.fields)
             .stream()
             .map(FieldDocument::toDomain)
             .collect(toList()))
-        .childrenPath(this.childrenPath)
-        .childrenQuery(this.childrenQuery)
         .children(ofNullable(this.children)
             .map(ContentDocument::toDomain)
             .orElse(null))
