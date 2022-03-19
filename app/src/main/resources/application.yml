@@ -19,7 +19,7 @@ spring:
     listener:
       concurrency: 1
     consumer:
-      group-id: my-crawlew
+      group-id: ${spring.application.name}
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
