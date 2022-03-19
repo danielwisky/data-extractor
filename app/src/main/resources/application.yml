@@ -10,6 +10,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/my-crawlew
+      auto-index-creation: true
     redis:
       repositories:
         enabled: false
