@@ -22,7 +22,7 @@ public class ConfigurationResponse {
 
   public ConfigurationResponse(final Configuration configuration) {
     this.id = configuration.getId();
-    this.objectType = configuration.getObjectType();
+    this.objectType = configuration.getType();
     this.url = configuration.getUrl();
     this.createdDate = configuration.getCreatedDate();
     this.lastModifiedDate = configuration.getLastModifiedDate();

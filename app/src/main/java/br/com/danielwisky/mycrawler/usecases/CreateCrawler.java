@@ -30,7 +30,7 @@ public class CreateCrawler {
   private Crawler saveAndSendToProcess(final Configuration configuration) {
     final Crawler crawler = crawlerDataGateway.save(Crawler.builder()
         .url(configuration.getUrl())
-        .objectType(configuration.getObjectType())
+        .objectType(configuration.getType())
         .status(WAITING_PROCESSING)
         .build());
     crawlerAsyncGateway.send(crawler);

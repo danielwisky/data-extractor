@@ -1,5 +1,7 @@
 package br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents;
 
+import static java.util.Optional.ofNullable;
+
 import br.com.danielwisky.mycrawler.domains.Configuration;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -18,15 +20,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document("configs")
 @CompoundIndexes({
-    @CompoundIndex(name = "objectType_url_idx", def = "{'objectType' : 1, 'url': 1}", unique = true)
+    @CompoundIndex(name = "type_url_idx", def = "{'type' : 1, 'url': 1}", unique = true)
 })
 public class ConfigurationDocument {
 
   @Id
   private String id;
   @Indexed
-  private String objectType;
+  private String type;
   private String url;
+  private String contentPath;
+  private String contentQuery;
+  private ContentDocument content;
 
   @CreatedDate
   private LocalDateTime createdDate;
@@ -35,8 +40,13 @@ public class ConfigurationDocument {
 
   public ConfigurationDocument(final Configuration configuration) {
     this.id = configuration.getId();
-    this.objectType = configuration.getObjectType();
+    this.type = configuration.getType();
     this.url = configuration.getUrl();
+    this.contentPath = configuration.getContentPath();
+    this.contentQuery = configuration.getContentQuery();
+    this.content = ofNullable(configuration.getContent())
+        .map(ContentDocument::new)
+        .orElse(null);
     this.createdDate = configuration.getCreatedDate();
     this.lastModifiedDate = configuration.getLastModifiedDate();
   }
@@ -44,8 +54,13 @@ public class ConfigurationDocument {
   public Configuration toDomain() {
     return Configuration.builder()
         .id(this.id)
-        .objectType(this.objectType)
+        .type(this.type)
         .url(this.url)
+        .contentPath(this.contentPath)
+        .contentQuery(this.contentQuery)
+        .content(ofNullable(this.content)
+            .map(ContentDocument::toDomain)
+            .orElse(null))
         .createdDate(this.createdDate)
         .lastModifiedDate(this.lastModifiedDate)
         .build();

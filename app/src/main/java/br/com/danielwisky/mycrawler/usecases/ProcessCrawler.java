@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -28,7 +29,11 @@ public class ProcessCrawler {
     final String html = crawlerExternalGateway.getContent(configuration.getUrl());
     final Document document = Jsoup.parse(html);
 
+    Elements select = document.select(".jss2 a");
+
     log.info("Document: {}", document);
+
+    
 
   }
 
