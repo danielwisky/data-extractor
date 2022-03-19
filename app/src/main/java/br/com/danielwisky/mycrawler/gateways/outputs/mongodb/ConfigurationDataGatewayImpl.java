@@ -29,16 +29,16 @@ public class ConfigurationDataGatewayImpl implements ConfigurationDataGateway {
   }
 
   @Override
-  public List<Configuration> findByObjectType(final String objectType) {
-    return emptyIfNull(configurationRepository.findByObjectType(objectType))
+  public List<Configuration> findByType(final String type) {
+    return emptyIfNull(configurationRepository.findByType(type))
         .stream()
         .map(ConfigurationDocument::toDomain)
         .collect(toList());
   }
 
   @Override
-  public Optional<Configuration> findByObjectTypeAndUrl(final String objectType, final String url) {
-    return configurationRepository.findByObjectTypeAndUrl(objectType, url)
+  public Optional<Configuration> findByTypeAndUrl(final String type, final String url) {
+    return configurationRepository.findByTypeAndUrl(type, url)
         .map(ConfigurationDocument::toDomain);
   }
 }

@@ -33,7 +33,7 @@ public class CrawlerController {
   public ResponseEntity<List<CrawlerResponse>> create(
       @RequestBody @Valid final CrawlerRequest crawlerRequest) {
     return ResponseEntity.ok(
-        createCrawler.execute(crawlerRequest.getObjectType(), crawlerRequest.getUrl())
+        createCrawler.execute(crawlerRequest.getType(), crawlerRequest.getUrl())
             .stream()
             .map(CrawlerResponse::new)
             .collect(toList()));

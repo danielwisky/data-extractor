@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class FindConfigurationsByObjectTypeAndUrl {
+public class FindConfigurationsByTypeAndUrl {
 
   private final ConfigurationDataGateway configurationDataGateway;
 
-  public List<Configuration> execute(final String objectType, final String url) {
-    final List<Configuration> configurations = findBy(objectType, url);
+  public List<Configuration> execute(final String type, final String url) {
+    final List<Configuration> configurations = findByTypeAndUrl(type, url);
     if (isEmpty(configurations)) {
       throw new ResourceNotFoundException("Configuration not found.");
     }
@@ -26,10 +26,9 @@ public class FindConfigurationsByObjectTypeAndUrl {
     return configurations;
   }
 
-  private List<Configuration> findBy(final String objectType, final String url) {
+  private List<Configuration> findByTypeAndUrl(final String type, final String url) {
     return StringUtils.isBlank(url)
-        ? configurationDataGateway.findByObjectType(objectType)
-        : configurationDataGateway.findByObjectTypeAndUrl(objectType, url)
-            .map(Arrays::asList).orElse(null);
+        ? configurationDataGateway.findByType(type)
+        : configurationDataGateway.findByTypeAndUrl(type, url).map(Arrays::asList).orElse(null);
   }
 }

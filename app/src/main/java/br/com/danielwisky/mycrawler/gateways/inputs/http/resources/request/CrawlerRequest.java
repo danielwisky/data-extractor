@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.URL;
 public class CrawlerRequest {
 
   @NotBlank
-  private String objectType;
+  private String type;
   @URL
   private String url;
 }

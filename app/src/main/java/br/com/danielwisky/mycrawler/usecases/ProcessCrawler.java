@@ -23,7 +23,7 @@ public class ProcessCrawler {
   public void execute(final Crawler crawler) {
 
     final Configuration configuration = configurationDataGateway
-        .findByObjectTypeAndUrl(crawler.getObjectType(), crawler.getUrl())
+        .findByTypeAndUrl(crawler.getType(), crawler.getUrl())
         .orElseThrow(() -> new ResourceNotFoundException("Configuration not found."));
 
     final String html = crawlerExternalGateway.getContent(configuration.getUrl());

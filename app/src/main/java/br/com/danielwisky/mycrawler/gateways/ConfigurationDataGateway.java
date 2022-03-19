@@ -10,7 +10,7 @@ public interface ConfigurationDataGateway {
 
   Configuration save(Configuration configuration);
 
-  List<Configuration> findByObjectType(String domain);
+  List<Configuration> findByType(String type);
 
-  Optional<Configuration> findByObjectTypeAndUrl(String url, String domain);
+  Optional<Configuration> findByTypeAndUrl(String type, String url);
 }

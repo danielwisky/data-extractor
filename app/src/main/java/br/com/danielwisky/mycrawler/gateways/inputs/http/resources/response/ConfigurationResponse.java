@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class ConfigurationResponse {
 
   private String id;
-  private String objectType;
+  private String type;
   private String url;
   private LocalDateTime createdDate;
   private LocalDateTime lastModifiedDate;
 
   public ConfigurationResponse(final Configuration configuration) {
     this.id = configuration.getId();
-    this.objectType = configuration.getType();
+    this.type = configuration.getType();
     this.url = configuration.getUrl();
     this.createdDate = configuration.getCreatedDate();
     this.lastModifiedDate = configuration.getLastModifiedDate();

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ConfigurationRepository extends MongoRepository<ConfigurationDocument, String> {
 
-  List<ConfigurationDocument> findByObjectType(String domain);
+  List<ConfigurationDocument> findByType(String domain);
 
-  Optional<ConfigurationDocument> findByObjectTypeAndUrl(String objectType, String url);
+  Optional<ConfigurationDocument> findByTypeAndUrl(String type, String url);
 }

@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CreateCrawler {
 
-  private final FindConfigurationsByObjectTypeAndUrl findConfigurationsByObjectTypeAndUrl;
+  private final FindConfigurationsByTypeAndUrl findConfigurationsByTypeAndUrl;
 
   private final CrawlerDataGateway crawlerDataGateway;
   private final CrawlerAsyncGateway crawlerAsyncGateway;
 
-  public List<Crawler> execute(final String objectType, final String url) {
-    return findConfigurationsByObjectTypeAndUrl.execute(objectType, url)
+  public List<Crawler> execute(final String type, final String url) {
+    return findConfigurationsByTypeAndUrl.execute(type, url)
         .stream()
         .map(this::saveAndSendToProcess)
         .collect(Collectors.toList());
@@ -30,7 +30,7 @@ public class CreateCrawler {
   private Crawler saveAndSendToProcess(final Configuration configuration) {
     final Crawler crawler = crawlerDataGateway.save(Crawler.builder()
         .url(configuration.getUrl())
-        .objectType(configuration.getType())
+        .type(configuration.getType())
         .status(WAITING_PROCESSING)
         .build());
     crawlerAsyncGateway.send(crawler);

@@ -16,12 +16,12 @@ public class ConfigurationRequest {
   @NotBlank
   private String url;
   @NotBlank
-  private String objectType;
+  private String type;
 
   public Configuration toDomain() {
     return Configuration.builder()
         .url(this.url)
-        .objectType(this.objectType)
+        .type(this.type)
         .build();
   }
 }

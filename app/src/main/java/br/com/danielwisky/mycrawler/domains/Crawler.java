@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Crawler {
 
   private String id;
-  private String objectType;
+  private String type;
   private String url;
 
   private CrawlerStatus status;

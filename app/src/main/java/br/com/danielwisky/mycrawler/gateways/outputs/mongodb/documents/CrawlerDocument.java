@@ -21,7 +21,7 @@ public class CrawlerDocument {
 
   @Id
   private String id;
-  private String objectType;
+  private String type;
   private String url;
   private String status;
 
@@ -32,7 +32,7 @@ public class CrawlerDocument {
 
   public CrawlerDocument(final Crawler crawler) {
     this.id = crawler.getId();
-    this.objectType = crawler.getObjectType();
+    this.type = crawler.getType();
     this.url = crawler.getUrl();
     this.status = ofNullable(crawler.getStatus())
         .map(Enum::name)
@@ -44,7 +44,7 @@ public class CrawlerDocument {
   public Crawler toDomain() {
     return Crawler.builder()
         .id(this.id)
-        .objectType(this.objectType)
+        .type(this.type)
         .url(this.url)
         .status(ofNullable(this.status)
             .map(CrawlerStatus::valueOf)
