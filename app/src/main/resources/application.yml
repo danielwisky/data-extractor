@@ -23,6 +23,8 @@ spring:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        max.poll.records: 10
     producer:
       retries: 10
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
