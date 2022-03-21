@@ -1,6 +1,8 @@
 package br.com.danielwisky.mycrawler.gateways.outputs.http;
 
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.replace;
 
 import br.com.danielwisky.mycrawler.converters.FilterConverter;
 import br.com.danielwisky.mycrawler.converters.ValueConverter;
@@ -31,22 +33,27 @@ public class CrawlerLineExternalGatewayImpl implements CrawlerLineExternalGatewa
   private final BeanFactory beanFactory;
 
   @Override
-  public List<CrawlerLine> findBy(final String url, final Content content) {
+  public List<CrawlerLine> findBy(
+      final String url, final Content content, final Map<String, String> parameters) {
 
-    final String html = bodyExternalGateway.getBody(
-        String.format("%s%s", url, StringUtils.trimToEmpty(content.getPath())));
+    final String html = bodyExternalGateway.getBody(addParamsUrl(url, content.getPath(), parameters));
     final Elements select = Jsoup.parse(html).select(content.getQuery());
 
     return select.stream()
-        .map(element -> buildLine(content, element))
+        .map(element -> buildLine(content, element, parameters))
         .collect(toList());
   }
 
-  private CrawlerLine buildLine(final Content content, final Element element) {
+  private CrawlerLine buildLine(
+      final Content content, final Element element, final Map<String, String> parameters) {
+
+    final Map<String, String> fields = extractFields(element, content.getFields());
+    fields.putAll(parameters);
+
     return CrawlerLine
         .builder()
         .type(content.getType())
-        .fields(extractFields(element, content.getFields()))
+        .fields(fields)
         .build();
   }
 
@@ -69,5 +76,14 @@ public class CrawlerLineExternalGatewayImpl implements CrawlerLineExternalGatewa
       value = converter.convert(value, filter.getParameters());
     }
     return value;
+  }
+
+  private String addParamsUrl(
+      final String url, final String path, final Map<String, String> parameters) {
+    String newUrl = format("%s%s", url, StringUtils.trimToEmpty(path));
+    for (Map.Entry<String, String> param : parameters.entrySet()) {
+      newUrl = replace(newUrl, format("#{%s}", param.getKey()), param.getValue());
+    }
+    return newUrl;
   }
 }

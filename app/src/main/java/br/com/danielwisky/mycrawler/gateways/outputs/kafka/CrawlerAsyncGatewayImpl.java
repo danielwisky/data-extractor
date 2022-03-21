@@ -7,6 +7,7 @@ import br.com.danielwisky.mycrawler.domains.Crawler;
 import br.com.danielwisky.mycrawler.gateways.CrawlerAsyncGateway;
 import br.com.danielwisky.mycrawler.gateways.outputs.kafka.resources.CrawlerContentJson;
 import br.com.danielwisky.mycrawler.utils.JsonUtils;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,9 @@ public class CrawlerAsyncGatewayImpl implements CrawlerAsyncGateway {
   private final JsonUtils jsonUtils;
 
   @Override
-  public void send(final Crawler crawler, final Content content) {
-    final String message = jsonUtils.toJson(new CrawlerContentJson(crawler, content));
+  public void send(
+      final Crawler crawler, final Content content, final Map<String, String> parameters) {
+    final String message = jsonUtils.toJson(new CrawlerContentJson(crawler, content, parameters));
     kafkaTemplate.send(CRAWLER_REQUEST, message);
   }
 }

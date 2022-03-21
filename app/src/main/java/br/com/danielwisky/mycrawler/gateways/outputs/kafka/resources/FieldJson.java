@@ -18,6 +18,7 @@ public class FieldJson {
   private String name;
   private String converter;
   private List<FilterJson> filters;
+  private Boolean replicate;
 
   public FieldJson(final Field field) {
     this.name = field.getName();
@@ -28,5 +29,6 @@ public class FieldJson {
         .stream()
         .map(FilterJson::new)
         .collect(Collectors.toList());
+    this.replicate = field.getReplicate();
   }
 }

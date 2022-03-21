@@ -25,7 +25,8 @@ public class CrawlerListener {
       final CrawlerContentJson resource = jsonUtils.toObject(message, CrawlerContentJson.class);
       processCrawler.execute(
           resource.getCrawler().toDomain(),
-          resource.getContent().toDomain());
+          resource.getContent().toDomain(),
+          resource.getParameters());
     } catch (Exception ex) {
       log.error("Error processing message: {}", message, ex);
     }

@@ -6,6 +6,7 @@ import br.com.danielwisky.mycrawler.domains.Configuration;
 import br.com.danielwisky.mycrawler.domains.Crawler;
 import br.com.danielwisky.mycrawler.gateways.CrawlerAsyncGateway;
 import br.com.danielwisky.mycrawler.gateways.CrawlerDataGateway;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class CreateCrawler {
         .type(configuration.getType())
         .status(WAITING_PROCESSING)
         .build());
-    crawlerAsyncGateway.send(crawler, configuration.getContent());
+    crawlerAsyncGateway.send(crawler, configuration.getContent(), new HashMap<>());
     return crawler;
   }
 }

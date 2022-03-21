@@ -19,6 +19,7 @@ public class FieldJson {
   private String name;
   private String converter;
   private List<FilterJson> filters;
+  private Boolean replicate;
 
   public Field toDomain() {
     return Field.builder()
@@ -30,6 +31,7 @@ public class FieldJson {
             .stream()
             .map(FilterJson::toDomain)
             .collect(toList()))
+        .replicate(this.replicate)
         .build();
   }
 }
