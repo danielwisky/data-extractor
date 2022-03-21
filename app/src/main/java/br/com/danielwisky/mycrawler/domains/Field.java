@@ -16,4 +16,6 @@ public class Field {
   private String name;
   private ValueConverterType converter;
   private List<Filter> filters;
+  private Boolean replicate;
+
 }

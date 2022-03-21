@@ -25,6 +25,8 @@ public class CrawlerLineDocument {
   private String id;
   @Indexed
   private String crawlerId;
+  @Indexed
+  private String parentId;
   private String type;
   private Map<String, String> fields;
   private String status;
@@ -36,6 +38,7 @@ public class CrawlerLineDocument {
   public CrawlerLineDocument(final CrawlerLine crawlerLine) {
     this.id = crawlerLine.getId();
     this.crawlerId = crawlerLine.getCrawlerId();
+    this.parentId = crawlerLine.getParentId();
     this.type = crawlerLine.getType();
     this.fields = crawlerLine.getFields();
     this.status = ofNullable(crawlerLine.getStatus())
@@ -49,6 +52,7 @@ public class CrawlerLineDocument {
     return CrawlerLine.builder()
         .id(this.id)
         .crawlerId(this.crawlerId)
+        .parentId(this.parentId)
         .type(this.type)
         .fields(this.fields)
         .status(ofNullable(this.status)

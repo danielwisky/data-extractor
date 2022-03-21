@@ -16,6 +16,7 @@ public class CrawlerLine {
 
   private String id;
   private String crawlerId;
+  private String parentId;
   private String type;
   private Map<String, String> fields;
   private CrawlerLineStatus status;
