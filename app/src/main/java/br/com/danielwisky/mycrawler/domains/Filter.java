@@ -1,6 +1,6 @@
 package br.com.danielwisky.mycrawler.domains;
 
-import java.util.List;
+import br.com.danielwisky.mycrawler.domains.enums.FilterConterterType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,12 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Content {
+public class Filter {
 
-  private String type;
-  private String path;
-  private String query;
-  private List<Field> fields;
-
-  private Content children;
+  private FilterConterterType converter;
+  private String[] parameters;
 }

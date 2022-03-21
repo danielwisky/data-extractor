@@ -3,7 +3,7 @@ package br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents;
 import static java.util.Optional.ofNullable;
 
 import br.com.danielwisky.mycrawler.domains.Crawler;
-import br.com.danielwisky.mycrawler.domains.CrawlerStatus;
+import br.com.danielwisky.mycrawler.domains.enums.CrawlerStatus;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;

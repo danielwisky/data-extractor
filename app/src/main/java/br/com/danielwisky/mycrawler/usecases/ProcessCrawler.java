@@ -1,17 +1,14 @@
 package br.com.danielwisky.mycrawler.usecases;
 
-import br.com.danielwisky.mycrawler.domains.Configuration;
+import static java.util.Objects.nonNull;
+
 import br.com.danielwisky.mycrawler.domains.Content;
 import br.com.danielwisky.mycrawler.domains.Crawler;
-import br.com.danielwisky.mycrawler.domains.exceptions.ResourceNotFoundException;
-import br.com.danielwisky.mycrawler.gateways.ConfigurationDataGateway;
-import br.com.danielwisky.mycrawler.gateways.CrawlerExternalGateway;
-import java.util.Map;
+import br.com.danielwisky.mycrawler.gateways.CrawlerAsyncGateway;
+import br.com.danielwisky.mycrawler.gateways.CrawlerLineDataGateway;
+import br.com.danielwisky.mycrawler.gateways.CrawlerLineExternalGateway;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -19,32 +16,18 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProcessCrawler {
 
-  private final ConfigurationDataGateway configurationDataGateway;
-  private final CrawlerExternalGateway crawlerExternalGateway;
+  private final CrawlerLineDataGateway crawlerLineDataGateway;
+  private final CrawlerLineExternalGateway crawlerLineExternalGateway;
+  private final CrawlerAsyncGateway crawlerAsyncGateway;
 
-  private final ExtractMapFromFields extractMapFromFields;
-
-  public void execute(final Crawler crawler) {
-
-    final Configuration configuration = configurationDataGateway
-        .findByTypeAndUrl(crawler.getType(), crawler.getUrl())
-        .orElseThrow(() -> new ResourceNotFoundException("Configuration not found."));
-
-    Content content = configuration.getContent();
-
-    final String html = crawlerExternalGateway.getContent(
-        String.format("%s%s", configuration.getUrl(), content.getPath()));
-
-    final Document document = Jsoup.parse(html);
-    Elements select = document.select(content.getQuery());
-
-    select.stream().forEach(element -> {
-      Map<String, String> execute = extractMapFromFields.execute(element, content.getFields());
-      log.info("map: {}", execute);
-    });
-
-    //log.info("Document: {}", document);
-
-
+  public void execute(final Crawler crawler, final Content content) {
+    crawlerLineExternalGateway.findBy(crawler.getUrl(), content)
+        .forEach(line -> {
+          line.setCrawlerId(crawler.getId());
+          crawlerLineDataGateway.save(line);
+          if (nonNull(content.getChildren())) {
+            crawlerAsyncGateway.send(crawler, content.getChildren());
+          }
+        });
   }
 }

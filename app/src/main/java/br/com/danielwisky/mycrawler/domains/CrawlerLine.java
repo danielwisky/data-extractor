@@ -1,5 +1,6 @@
 package br.com.danielwisky.mycrawler.domains;
 
+import br.com.danielwisky.mycrawler.domains.enums.CrawlerLineStatus;
 import java.time.LocalDateTime;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,9 @@ public class CrawlerLine {
 
   private String id;
   private String crawlerId;
+  private String type;
   private Map<String, String> fields;
+  private CrawlerLineStatus status;
 
   private LocalDateTime createdDate;
   private LocalDateTime lastModifiedDate;

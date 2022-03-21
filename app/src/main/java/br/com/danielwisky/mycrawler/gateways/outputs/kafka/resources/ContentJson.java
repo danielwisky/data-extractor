@@ -1,4 +1,4 @@
-package br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents;
+package br.com.danielwisky.mycrawler.gateways.outputs.kafka.resources;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
@@ -13,39 +13,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContentDocument {
+public class ContentJson {
 
   private String type;
   private String path;
   private String query;
-  private List<FieldDocument> fields;
-  private ContentDocument children;
+  private List<FieldJson> fields;
+  private ContentJson children;
 
-  public ContentDocument(final Content content) {
+  public ContentJson(final Content content) {
     this.type = content.getType();
     this.path = content.getPath();
     this.query = content.getQuery();
     this.fields = emptyIfNull(content.getFields())
         .stream()
-        .map(FieldDocument::new)
+        .map(FieldJson::new)
         .collect(toList());
     this.children = ofNullable(content.getChildren())
-        .map(ContentDocument::new)
+        .map(ContentJson::new)
         .orElse(null);
-  }
-
-  public Content toDomain() {
-    return Content.builder()
-        .type(this.type)
-        .path(this.path)
-        .query(this.query)
-        .fields(emptyIfNull(this.fields)
-            .stream()
-            .map(FieldDocument::toDomain)
-            .collect(toList()))
-        .children(ofNullable(this.children)
-            .map(ContentDocument::toDomain)
-            .orElse(null))
-        .build();
   }
 }

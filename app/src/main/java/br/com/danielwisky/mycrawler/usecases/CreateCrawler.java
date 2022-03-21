@@ -1,6 +1,6 @@
 package br.com.danielwisky.mycrawler.usecases;
 
-import static br.com.danielwisky.mycrawler.domains.CrawlerStatus.WAITING_PROCESSING;
+import static br.com.danielwisky.mycrawler.domains.enums.CrawlerStatus.WAITING_PROCESSING;
 
 import br.com.danielwisky.mycrawler.domains.Configuration;
 import br.com.danielwisky.mycrawler.domains.Crawler;
@@ -33,7 +33,7 @@ public class CreateCrawler {
         .type(configuration.getType())
         .status(WAITING_PROCESSING)
         .build());
-    crawlerAsyncGateway.send(crawler);
+    crawlerAsyncGateway.send(crawler, configuration.getContent());
     return crawler;
   }
 }

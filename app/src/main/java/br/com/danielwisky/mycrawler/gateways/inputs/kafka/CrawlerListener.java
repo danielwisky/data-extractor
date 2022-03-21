@@ -4,6 +4,7 @@ import static br.com.danielwisky.mycrawler.domains.constants.Topic.CRAWLER_REQUE
 
 import br.com.danielwisky.mycrawler.domains.Crawler;
 import br.com.danielwisky.mycrawler.gateways.inputs.kafka.resources.CrawlerJson;
+import br.com.danielwisky.mycrawler.gateways.outputs.kafka.resources.CrawlerContentJson;
 import br.com.danielwisky.mycrawler.usecases.ProcessCrawler;
 import br.com.danielwisky.mycrawler.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class CrawlerListener {
   public void receive(final String message) {
     try {
       log.info("Receiving message: {}", message);
-      final Crawler crawler = jsonUtils.toObject(message, CrawlerJson.class).toDomain();
+      final Crawler crawler = jsonUtils.toObject(message, CrawlerContentJson.class).toDomain();
       processCrawler.execute(crawler);
     } catch (Exception ex) {
       log.error("Error processing message: {}", message, ex);

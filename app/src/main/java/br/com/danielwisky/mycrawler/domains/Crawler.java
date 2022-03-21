@@ -1,5 +1,6 @@
 package br.com.danielwisky.mycrawler.domains;
 
+import br.com.danielwisky.mycrawler.domains.enums.CrawlerStatus;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

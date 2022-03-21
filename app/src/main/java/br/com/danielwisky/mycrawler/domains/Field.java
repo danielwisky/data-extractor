@@ -1,5 +1,6 @@
 package br.com.danielwisky.mycrawler.domains;
 
+import br.com.danielwisky.mycrawler.domains.enums.ValueConverterType;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class Field {
 
   private String name;
-  private String value;
-  private List<String> converters;
+  private ValueConverterType converter;
+  private List<Filter> filters;
 }
