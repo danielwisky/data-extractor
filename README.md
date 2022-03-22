@@ -8,7 +8,6 @@ Generic data extraction system
 
 ```
 db.configs.save({
-    "_id": ObjectId("623485b74534c959fcb2cd38"),
     "type": "BIBLE",
     "url": "https://www.bibliaonline.com.br",
     "content": {
@@ -93,4 +92,80 @@ db.configs.save({
     "lastModifiedDate": ISODate("2022-03-18T15:26:43.397-03:00"),
     "_class": "br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents.ConfigurationDocument"
 });
+```
+
+* https://biblia-a-mensagem.vercel.app/
+
+```
+db.configs.save({
+    "type": "BIBLE",
+    "url": "https://biblia-a-mensagem.vercel.app",
+    "content": {
+        "type": "book",
+        "query": ".MuiButton-label",
+        "fields": [{
+                "name": "key",
+                "converter": "VALUE_FROM_TEXT",
+                "filters": [{
+                        "converter": "REPLACE_TO_EMPTY",
+                        "parameters": [" "]
+                    },
+                    {
+                        "converter": "LOWERCASE",
+                        "parameters": [" "]
+                    },
+                    {
+                        "converter": "NORMALIZE"
+                    }
+                ],
+                "replicate": true
+            },
+            {
+                "name": "name",
+                "converter": "VALUE_FROM_TEXT"
+            }
+        ],
+        "children": {
+            "type": "chapter",
+            "path": "/livro/#{book_key}",
+            "query": ".MuiButton-label",
+            "fields": [{
+                    "name": "key",
+                    "converter": "VALUE_FROM_TEXT",
+                    "replicate": true
+                },
+                {
+                    "name": "name",
+                    "converter": "VALUE_FROM_TEXT"
+                }
+            ],
+            "children": {
+                "type": "versicle",
+                "path": "/livro/#{book_key}/#{chapter_key}",
+                "query": "p.MuiTypography-root",
+                "fields": [{
+                        "name": "key",
+                        "converter": "VALUE_FROM_TEXT",
+                        filters: [{
+                            "converter": "SUBSTRING_BEFORE",
+                            "parameters": [" "]
+                        }]
+                    },
+                    {
+                        "name": "name",
+                        "converter": "VALUE_FROM_TEXT",
+                        filters: [{
+                            "converter": "SUBSTRING_AFTER",
+                            "parameters": [" "]
+                        }]
+                    }
+                ]
+            }
+        }
+    },
+    "createdDate": ISODate("2022-03-18T15:26:43.397-03:00"),
+    "lastModifiedDate": ISODate("2022-03-18T15:26:43.397-03:00"),
+    "_class": "br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents.ConfigurationDocument"
+});
+
 ```
