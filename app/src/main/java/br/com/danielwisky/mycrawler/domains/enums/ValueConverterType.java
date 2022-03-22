@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum ValueConverterType {
 
   VALUE_FROM_HREF("valueFromHref"),
-  VALUE_FROM_TEXT("valueFromText");
+  VALUE_FROM_TEXT("valueFromText"),
+  VALUE_FROM_OWN_TEXT("valueFromOwnText");
 
   private final String bean;
-
 }
