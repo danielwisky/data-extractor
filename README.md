@@ -147,17 +147,13 @@ db.configs.save({
                         "name": "key",
                         "converter": "VALUE_FROM_TEXT",
                         filters: [{
-                            "converter": "SUBSTRING_BEFORE",
-                            "parameters": [" "]
+                            "converter": "SPLIT_GET_FIRST",
+                            "parameters": ["[^\\d\\-]"]
                         }]
                     },
                     {
                         "name": "name",
-                        "converter": "VALUE_FROM_TEXT",
-                        filters: [{
-                            "converter": "SUBSTRING_AFTER",
-                            "parameters": [" "]
-                        }]
+                        "converter": "VALUE_FROM_OWN_TEXT"
                     }
                 ]
             }
@@ -167,5 +163,4 @@ db.configs.save({
     "lastModifiedDate": ISODate("2022-03-18T15:26:43.397-03:00"),
     "_class": "br.com.danielwisky.mycrawler.gateways.outputs.mongodb.documents.ConfigurationDocument"
 });
-
 ```
