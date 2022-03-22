@@ -36,7 +36,8 @@ public class CrawlerLineExternalGatewayImpl implements CrawlerLineExternalGatewa
   public List<CrawlerLine> findBy(
       final String url, final Content content, final Map<String, String> parameters) {
 
-    final String html = bodyExternalGateway.getBody(addParamsUrl(url, content.getPath(), parameters));
+    final String html = bodyExternalGateway.getBody(
+        addParamsUrl(url, content.getPath(), parameters));
     final Elements select = Jsoup.parse(html).select(content.getQuery());
 
     return select.stream()
