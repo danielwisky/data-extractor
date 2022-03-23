@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProcessCrawler {
 
+  private static final String PARENT_ID = "parent-id:hidden";
+
   private final CrawlerLineDataGateway crawlerLineDataGateway;
   private final CrawlerLineExternalGateway crawlerLineExternalGateway;
   private final CrawlerAsyncGateway crawlerAsyncGateway;
@@ -30,12 +32,18 @@ public class ProcessCrawler {
     crawlerLineExternalGateway.findBy(crawler.getUrl(), content, parameters)
         .forEach(line -> {
           line.setCrawlerId(crawler.getId());
-          crawlerLineDataGateway.save(line);
+          line.setParentId(getParentKey(parameters));
+          line = crawlerLineDataGateway.save(line);
           if (nonNull(content.getChildren())) {
+            parameters.put(PARENT_ID, line.getId());
             replicateParameters(content, parameters, line.getFields());
             crawlerAsyncGateway.send(crawler, content.getChildren(), parameters);
           }
         });
+  }
+
+  private String getParentKey(final Map<String, String> parameters) {
+    return parameters.containsKey(PARENT_ID) ? parameters.get(PARENT_ID) : null;
   }
 
   private void replicateParameters(

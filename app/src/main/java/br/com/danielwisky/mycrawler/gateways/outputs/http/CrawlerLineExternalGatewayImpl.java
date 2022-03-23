@@ -2,6 +2,7 @@ package br.com.danielwisky.mycrawler.gateways.outputs.http;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.StringUtils.replace;
 
 import br.com.danielwisky.mycrawler.converters.FilterConverter;
@@ -29,6 +30,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CrawlerLineExternalGatewayImpl implements CrawlerLineExternalGateway {
 
+  private static final String HIDDEN = ":hidden";
+
   private final BodyExternalGateway bodyExternalGateway;
   private final BeanFactory beanFactory;
 
@@ -49,7 +52,10 @@ public class CrawlerLineExternalGatewayImpl implements CrawlerLineExternalGatewa
       final Content content, final Element element, final Map<String, String> parameters) {
 
     final Map<String, String> fields = extractFields(element, content.getFields());
-    fields.putAll(parameters);
+    fields.putAll(parameters.entrySet()
+        .stream()
+        .filter(map -> !StringUtils.contains(map.getKey(), HIDDEN))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
     return CrawlerLine
         .builder()
