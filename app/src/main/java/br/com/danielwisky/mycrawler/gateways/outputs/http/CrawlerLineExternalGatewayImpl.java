@@ -2,7 +2,6 @@ package br.com.danielwisky.mycrawler.gateways.outputs.http;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.StringUtils.replace;
 
 import br.com.danielwisky.mycrawler.converters.FilterConverter;
