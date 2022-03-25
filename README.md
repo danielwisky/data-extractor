@@ -1,6 +1,21 @@
 # my-crawler
 
+![](https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange)
+![](https://img.shields.io/badge/Autor-Daniel%20Wisky-brightgreen)
+![](https://img.shields.io/badge/Language-Java-brightgreen)
+![](https://img.shields.io/badge/Framework-Spring%20Boot-brightgreen)
+![](https://img.shields.io/badge/Arquitetura-Clean%20Arch-brightgreen)
+
 Generic data extraction system
+
+## Technologies
+
+* [Java](https://www.java.com/pt-BR/)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Redis](https://redis.io/)
+* [Kafka](https://kafka.apache.org/)
+* [MongoDB](https://www.mongodb.com/)
+* [Maven](https://maven.apache.org/)
 
 ## Configuration example
 
